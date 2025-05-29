@@ -13,7 +13,7 @@
 <slot/>
       </span>
     
-      <span class="shrink-0 rounded-full border-2 border-current bg-[var(--color-accent-300)] p-2 text-[var(--color-text-inverse)] group-hover:bg-transparent group-hover:border-[var(--color-accent-900)]  group-hover:text-[var(--color-text-inverse)] transition-colors">
+      <span class="shrink-0 rounded-full border-2 border-current bg-[var(--color-accent-300)] p-2 text-[var(--color-text-inverse)] group-hover:bg-transparent group-hover:border-[var(--color-accent-500)]  group-hover:text-[var(--color-accent-500)] transition-colors">
         <svg
           class="size-5 shadow-sm rtl:rotate-180"
           xmlns="http://www.w3.org/2000/svg"

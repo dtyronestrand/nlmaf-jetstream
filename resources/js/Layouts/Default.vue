@@ -75,6 +75,7 @@
          IMPORTANT: Replace 'bg-white dark:bg-neutral-800' with your site's actual page background color classes or variables. -->
     <main class="mt-20 min-h-screen">
         <slot></slot>
+     
     </main>
     <footer class="hidden  bg-[var(--nav-bg)] md:static md:bottom-0 md:grid md:grid-cols-3 mt-20 w-full h-[auto] border-t border-[var(--color-accent-500)]">
     <!-- Image Section -->
@@ -91,7 +92,7 @@
     <p>
     <span class="text-2xl tracking-wide text-[var(--color-text-primary)] uppercae">Contact Us</span>
     <span class="block text-xl font-medium text-[var(--color-text-primary)]">804-867-5309</span>
-    <PrimaryButton @click="contact">Leave a Message</PrimaryButton>
+    <PrimaryButton >Leave a Message</PrimaryButton>
     </p>
 
     </div>

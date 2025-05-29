@@ -6,3 +6,7 @@ use A17\Twill\Facades\TwillRoutes;
 // TwillRoutes::module('posts');
 
 TwillRoutes::singleton('pageHome');
+TwillRoutes::module('menuLinks');
+TwillRoutes::module('pages');
+TwillRoutes::module('programs');
+TwillRoutes::module('news');
