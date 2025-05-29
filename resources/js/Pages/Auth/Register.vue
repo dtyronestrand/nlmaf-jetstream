@@ -9,7 +9,8 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 
 const form = useForm({
-    name: '',
+    first_name: '',
+    last_name: '',
     email: '',
     password: '',
     password_confirmation: '',
@@ -27,25 +28,34 @@ const submit = () => {
     <Head title="Register" />
 
     <AuthenticationCard>
-        <template #logo>
-            <AuthenticationCardLogo />
-        </template>
+
 
         <form @submit.prevent="submit">
             <div>
-                <InputLabel for="name" value="Name" />
+                <InputLabel for="first_name" value="First Name" />
                 <TextInput
-                    id="name"
-                    v-model="form.name"
+                    id="first_name"
+                    v-model="form.first_name"
                     type="text"
                     class="mt-1 block w-full"
                     required
                     autofocus
-                    autocomplete="name"
+                    autocomplete="first-name"
                 />
-                <InputError class="mt-2" :message="form.errors.name" />
+                <InputError class="mt-2" :message="form.errors.first_name" />
             </div>
-
+            <div class="mt-4">
+                <InputLabel for="last_name" value="Last Name" />
+                <TextInput
+                    id="last_name"
+                    v-model="form.last_name"
+                    type="text"
+                    class="mt-1 block w-full"
+                    required
+                    autocomplete="last-name"
+                />
+                <InputError class="mt-2" :message="form.errors.last_name" />
+</div>
             <div class="mt-4">
                 <InputLabel for="email" value="Email" />
                 <TextInput
@@ -99,7 +109,7 @@ const submit = () => {
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <Link :href="route('login')" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                <Link :href="route('login')" class="underline text-sm text-[var--color-text-primary] hover:text-[var(--color-accent)] rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var-color-accent]">
                     Already registered?
                 </Link>
 

@@ -22,8 +22,10 @@
     "dependencies": {
         "@fontsource/protest-riot": "^5.2.5",
         "@iconify/vue": "^5.0.0",
+        "@vueuse/core": "^13.3.0",
         "clsx": "^2.1.1",
         "dayjs": "^1.11.13",
+        "motion-v": "^1.1.1",
         "tailwind-merge": "^3.3.0"
     }
 }
