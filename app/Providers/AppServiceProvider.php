@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
     NavigationLink::make()
     ->title(Str::ucfirst(__('content')))
     ->forSingleton('pageHome')
-    ->donotAddSelfAsFirstChild()
+    ->doNotAddSelfAsFirstChild()
     ->setChildren([
         NavigationLink::make()
         ->title(Str::ucfirst(__('home')))
@@ -46,8 +46,21 @@ class AppServiceProvider extends ServiceProvider
 );
 TwillNavigation::addLink(
      NavigationLink::make()
-        ->title(Str::ucfirst(__('Navigation Menu')))
+        ->title(Str::ucfirst(__(' Menus')))
         ->forModule('menuLinks')
+        ->doNotAddSelfAsFirstChild()
+        ->setChildren([
+            NavigationLink::make(
+            )
+            ->title(Str::ucfirst(__('Main')))
+            ->forModule('menuLinks'),
+            NavigationLink::make()
+            ->title(Str::ucfirst(__('Dashboard Menu')))
+            ->forModule('sidemenu'),
+            NavigationLink::make()
+            ->title(Str::ucfirst(__('TKD Menu')))
+            ->forModule('tkdmenu'),
+            ]),
 );
 
         Relation::enforceMorphMap([
@@ -56,6 +69,8 @@ TwillNavigation::addLink(
             'menuLink' => 'App\Models\MenuLink',
             'program' => 'App\Models\Program',
             'news' => 'App\Models\News',
+            'sidemenu' => 'App\Models\Sidemenu',
+            'tkdmenu' => 'App\Models\Tkdmenu',
         ]);
     }
 }

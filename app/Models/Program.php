@@ -69,4 +69,5 @@ class Program extends Model implements Sortable
             $program->medias = $medias;
         };
     }
+
 }

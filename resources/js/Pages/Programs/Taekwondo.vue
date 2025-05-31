@@ -1,5 +1,32 @@
 <template>
     <Head :item="item"></Head>
+    <div v-if="$page.props.auth.user !== null" class="flex h-screen">
+    <aside class="hidden w-64 bg-gradient-to-b from-[var(--color-primary-900)] to-[var(--color-primary-800)] border-r-2 border-[var(--color-accent)] md:block">
+<div class="py-3 text-2xl uppercase text-center tracking-widest bg-[var(--color-primary-900)] border-b-2 border-[var(--color-accent)] mb-8">
+<a href="/" class="text-[var(--color-accent)]">NLMAF</a>
+</div>
+<nav class="text-lg text-[var(--color-text-primary)]">
+<ul class="flex flex-col">
+<li v-for="(link, index) in $page.props.menu">
+<Link :href="link.url" :key="index" class="flex items-center px-4 py-2 hover:bg-[var(--color-accent-500)] hover:text-[var(--color-neutral-900)] ">{{ link.title }}</Link>
+</li>
+</ul>
+<Link href="/logout" method="post" class="mt-4 px-4 py-2  text-[var(--color-neutral-100)] ">Logout</Link>
+</nav>
+      <div class="h-40 w-40 overflow-hidden sm:rounded-full sm:relative sm:p-0 top-10 left-5 p-4">
+         <img :src="$page.props.auth.user.profile_photo_url" alt="Profile Photo" class="w-full h-full object-cover"/>
+      </div>
+            <div class=" w-2/3 sm:text-center pl-10 mt-10 text-start flex items-center">
+         <p class="font-bold text-[var(--color-text-primary)] text-heading  sm:text-4xl text-2xl">{{ $page.props.auth.user.name }}</p>
+      </div> 
+</aside>
+<main class="grid grid-cols-4 gap-4 auto-rows-fr grid-flow-dense">
+   <!-- top content -->
+<BlockCommonBento :block="bentoBlock"/>
+   
+</main>
+    </div>
+  <div v-else>
 <Default>
     <h1>
         <TextGenerate
@@ -46,7 +73,8 @@
                     </div>
                 </div>
             </div>
-        </div>
+            </div>
+     
     </section>
     <section class="content">
         <article class="content-inner">
@@ -68,6 +96,47 @@
                 expert instructors will guide you every step of the way.
             </p>
         </article>
+        <article class="content__inner">
+            <h2 class="content__title mt-12">
+                Why Choose Our Taekwondo Classes?
+            </h2>
+            <p>
+                Our Taekwondo classes offer a unique blend of physical fitness,
+                mental discipline, and self-defense skills. Here are some of the
+                key benefits you can expect:
+            </p>
+            <ul class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <li class="bg-[var(--color-primary-900)] rounded-lg shadow-lg p-9">
+            <h3 class="text-xl font-bold text-[var(--color-text-primary)] mb-4">
+                Flexible Location
+            </h3>
+            <p class="text-[var(--color-text-primary)]">
+            With location in Beaverdam, VA and J Sargeat Reynolds Community College*. We believe in bringing the fitness to you. Contact us, to learn about bringing our classes to your business, organization, or community.</p>
+            </li>
+            <li class="bg-[var(--color-primary-900)] rounded-lg shadow-lg p-9">
+            <h3 class="text-xl font-bold text-[var(--color-text-primary)] mb-4">
+            Affordability</h3>
+            <p class="text-[var(--color-text-primary)]">
+            Whether you pay per class or monthly in advance, our rates are designed to make fitness accessible to everyone.
+            </p>
+            </li>
+            <li class="bg-[var(--color-primary-900)] rounded-lg shadow-lg p-9">
+            <div>
+            <GlowingEffect   :spread="40"
+          :glow="true"
+          :disabled="false"
+          :proximity="64"
+          :inactive-zone="0.01"/>
+            <h3 class="text-xl font-bold text-[var(--color-text-primary)] mb-4">
+            Made for Everyone</h3>
+            <p class="text-[var(--color-text-primary)]">
+            Encorporating best practice in martial arts with the science of teacching and learning, our classess meet you where you are and help you to grow to where you want to be.
+            </p>
+            </div>
+            </li>
+            </ul>
+        </article>
+
     </section>
 
     <div
@@ -80,23 +149,31 @@
                 v-if="block.type === 'common-text'"
                 :block="block"
             ></BlockCommonText>
+            
         </div>
-    </div>
+        
+        </div>
+  
+     
+   
     </Default>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount, nextTick } from "vue";
+import { ref, onMounted, onBeforeUnmount, nextTick, computed } from "vue";
 import Head from "@/Components/Theme/Head.vue";
 import { defineAsyncComponent } from "vue";
-import ProgramsLayout from "@/Layouts/ProgramsLayout.vue";
+import { Link } from "@inertiajs/vue3";
 import TextGenerate from "@/Components/Theme/UI/TextGenerate.vue";
 import TextScrollReveal from "@/Components/Theme/UI/TextScroll/TextScrollReveal.vue";
 import Default from '../../Layouts/Default.vue';
+import GlowingEffect from "@/Components/Theme/UI/GlowingEffect.vue";
+
 interface Props {
     item: Model.Program;
 }
-defineProps<Props>();
+const props = defineProps<Props>();
 const words = "What Can Taekwondo Do For You?";
 const headlines = [
     {
@@ -124,11 +201,35 @@ const headlines = [
         image: "/assets/images/community.jpg",
     },
 ];
+const bentoBlock = computed(() => {
+    if (props.item?.blocks && Array.isArray(props.item.blocks)) {
+        return props.item.blocks.find((block) => block.type === 'common-bento');
+    }
+    return null;
+});
+let bentoSize  = null;
+switch(bentoBlock.value?.content.size){
+    case "small":
+     bentoSize = 2;
+     break;
+    case "medium":
+        bentoSize = 4;
+        break;
+    case "large":
+        bentoSize = 6;
+        break;
+    default:
+        bentoSize = 4;
+
+}
 const BlockCommonHeading = defineAsyncComponent(
     () => import("../../Components/Theme/Block/Common/Heading.vue")
 );
 const BlockCommonText = defineAsyncComponent(
     () => import("../../Components/Theme/Block/Common/Text.vue")
+);
+const BlockCommonBento = defineAsyncComponent(
+    () => import("../../Components/Theme/Block/Common/Bento.vue")
 );
 
 // --- Horizontal scroll on vertical scroll logic ---

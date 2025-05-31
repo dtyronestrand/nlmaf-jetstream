@@ -11,13 +11,14 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth; // Added import
 use Illuminate\Support\Facades\Redirect; // Added import
 use Illuminate\Support\Str;
-
+use App\Models\Tkdmenu;;
 class ProgramController extends Controller
 {
     public function index(): InertiaResponse
     {
    
         $programsPaginator = Program::publishedInListings()
+            ->where('parent_id', null) // Only top-level programs
             ->with('blocks', 'medias')
             ->orderBy('position', 'asc')
             ->paginate(10);
@@ -34,13 +35,11 @@ class ProgramController extends Controller
     public function show(string $slug): InertiaResponse
     {
         // Check for Taekwondo slug and user tkd attribute
-                  
-            if ($slug === 'taekwondo') {
-            $user = Auth::user();
-            if ($user && $user->tkd === true) {
-           return redirect()->route('programs.taekwondo.members');
-            }
-        }
+                $menu = Tkdmenu::publishedInListings()
+            ->orderBy('position', 'asc')
+            ->get();
+
+
 
         // Get the current locale
         $locale = App::getLocale();
@@ -96,10 +95,23 @@ class ProgramController extends Controller
                 return Str::studly($segment); // Converts 'kebab-case' to 'PascalCase'
             }, explode('/', $slug));
             $inertiaComponent = 'Programs/' . implode('/', $componentNameParts);
-
+                     
+            if ($slug === 'taekwondo') {
+            $user = Auth::user();
+            if ($user && $user->tkd === true) {
+                return redirect()
+                    ->route('programs.taekwondo.members')
+                    ->with([
+                        'item' => $item ? $item->only($item->publicAttributes) : null,
+                        'locale' => $locale,
+                        'menu' => $menu,
+                    ]);
+            }
+        }
             return Inertia::render($inertiaComponent, [
                 'item' => $item->only($item->publicAttributes),
                 'locale' => $locale, // Pass locale to the view
+                'menu' => $menu, // Pass the menu to the view
             ]);
         }
     }

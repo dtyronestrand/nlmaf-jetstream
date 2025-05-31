@@ -10,3 +10,5 @@ TwillRoutes::module('menuLinks');
 TwillRoutes::module('pages');
 TwillRoutes::module('programs');
 TwillRoutes::module('news');
+TwillRoutes::module('sidemenus');
+TwillRoutes::module('tkdmenus');
