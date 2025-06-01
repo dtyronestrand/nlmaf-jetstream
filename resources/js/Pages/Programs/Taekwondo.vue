@@ -4,6 +4,12 @@
     <aside class="hidden w-64 bg-gradient-to-b from-[var(--color-primary-900)] to-[var(--color-primary-800)] border-r-2 border-[var(--color-accent)] md:block">
 <div class="py-3 text-2xl uppercase text-center tracking-widest bg-[var(--color-primary-900)] border-b-2 border-[var(--color-accent)] mb-8">
 <a href="/" class="text-[var(--color-accent)]">NLMAF</a>
+<p class="text-xl">Welcome Back</p>
+        <p class="font-bold mt-10 text-[var(--color-text-primary)] text-center  sm:text-2xl text-xl">{{ $page.props.auth.user.name }}</p>
+            <div class="h-20 w-20 overflow-hidden sm:rounded-full sm:relative sm:p-0 top-10 left-5 p-4">
+         <img :src="$page.props.auth.user.profile_photo_url" alt="Profile Photo" class="w-full h-full object-cover"/>
+      </div>
+       <Link href="/logout" method="post" class="mt-4 px-4 py-2  text-[var(--color-neutral-100)] ">Logout</Link>
 </div>
 <nav class="text-lg text-[var(--color-text-primary)]">
 <ul class="flex flex-col">
@@ -11,20 +17,15 @@
 <Link :href="link.url" :key="index" class="flex items-center px-4 py-2 hover:bg-[var(--color-accent-500)] hover:text-[var(--color-neutral-900)] ">{{ link.title }}</Link>
 </li>
 </ul>
-<Link href="/logout" method="post" class="mt-4 px-4 py-2  text-[var(--color-neutral-100)] ">Logout</Link>
+
 </nav>
-      <div class="h-40 w-40 overflow-hidden sm:rounded-full sm:relative sm:p-0 top-10 left-5 p-4">
-         <img :src="$page.props.auth.user.profile_photo_url" alt="Profile Photo" class="w-full h-full object-cover"/>
-      </div>
-            <div class=" w-2/3 sm:text-center pl-10 mt-10 text-start flex items-center">
-         <p class="font-bold text-[var(--color-text-primary)] text-heading  sm:text-4xl text-2xl">{{ $page.props.auth.user.name }}</p>
-      </div> 
+  
+           
+ 
+
+     
 </aside>
-<main class="grid grid-cols-4 gap-4 auto-rows-fr grid-flow-dense">
-   <!-- top content -->
 <BlockCommonBento :block="bentoBlock"/>
-   
-</main>
     </div>
   <div v-else>
 <Default>
@@ -81,7 +82,7 @@
             <h2 class="content__title">
                 Taekwondo is More Than Just a Martial Art
             </h2>
-            <p>
+            <p class="text-2xl">
                 Originating in Korea over 2,000 years ago, Taekwondo is a
                 martial art that combines combat techniques, self-defense,
                 sport, and exercise. The name "Taekwondo" is derived from the
@@ -100,41 +101,44 @@
             <h2 class="content__title mt-12">
                 Why Choose Our Taekwondo Classes?
             </h2>
-            <p>
+            <p class="text-2xl">
                 Our Taekwondo classes offer a unique blend of physical fitness,
                 mental discipline, and self-defense skills. Here are some of the
                 key benefits you can expect:
             </p>
-            <ul class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <li class="bg-[var(--color-primary-900)] rounded-lg shadow-lg p-9">
-            <h3 class="text-xl font-bold text-[var(--color-text-primary)] mb-4">
+            <div class="flex content-center ml-8 justify-center">
+            <ul class="flex flex-1 gap-8 p-8 md:p-16 ">
+            <li class="relative px-5 pt-10 pb-2 flex flex-col justify-start items-center bg- border-2 border-[var(--color-accent)] rounded-xl text-[var(--color-text-primary)] max-w-[30rem] bg-[var(--color-primary-800)]">
+             <span class="absolute -top-6 p-3 border-2 border-[var(--color-accent)] rounded-full  bg-[var(--color-primary-800)]">
+             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" fill-rule="evenodd"><path d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"/><path fill="currentColor" d="M12 2a9 9 0 0 1 9 9c0 3.074-1.676 5.59-3.442 7.395a20.4 20.4 0 0 1-2.876 2.416l-.426.29l-.2.133l-.377.24l-.336.205l-.416.242a1.87 1.87 0 0 1-1.854 0l-.416-.242l-.52-.32l-.192-.125l-.41-.273a20.6 20.6 0 0 1-3.093-2.566C4.676 16.589 3 14.074 3 11a9 9 0 0 1 9-9m0 2a7 7 0 0 0-7 7c0 2.322 1.272 4.36 2.871 5.996a18 18 0 0 0 2.222 1.91l.458.326q.222.155.427.288l.39.25l.343.209l.289.169l.455-.269l.367-.23q.293-.186.627-.417l.458-.326a18 18 0 0 0 2.222-1.91C17.728 15.361 19 13.322 19 11a7 7 0 0 0-7-7m0 3a4 4 0 1 1 0 8a4 4 0 0 1 0-8m0 2a2 2 0 1 0 0 4a2 2 0 0 0 0-4"/></g></svg>
+             </span>
+                <h3 class="my-1 text-[var(--color-text-primary)] uppercase tracking-wide border-b border-[var(--color-accent)] pb-2">
                 Flexible Location
             </h3>
-            <p class="text-[var(--color-text-primary)]">
+           <p class="pl-2 py-4 text-balance text-md">
             With location in Beaverdam, VA and J Sargeat Reynolds Community College*. We believe in bringing the fitness to you. Contact us, to learn about bringing our classes to your business, organization, or community.</p>
             </li>
-            <li class="bg-[var(--color-primary-900)] rounded-lg shadow-lg p-9">
-            <h3 class="text-xl font-bold text-[var(--color-text-primary)] mb-4">
-            Affordability</h3>
-            <p class="text-[var(--color-text-primary)]">
+            <li class="col-span-4 sm:col-span-2 lg:col-span-1 relative px-5 pt-10 pb-2 flex flex-col justify-start items-center bg- border-2 border-[var(--color-accent)] rounded-xl text-[var(--color-text-primary)] max-w-[30rem] bg-[var(--color-primary-800)]">
+             <span class="absolute -top-6 p-3 border-2 border-[var(--color-accent)] rounded-full  bg-[var(--color-primary-800)]">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none"><path d="M0 0h24v24H0z"/><path fill="currentColor" d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2m0 2a8 8 0 1 0 0 16a8 8 0 0 0 0-16m0 2a1 1 0 0 1 .993.883L13 7v1h2a1 1 0 0 1 .117 1.993L15 10h-5a.5.5 0 0 0-.09.992L10 11h4a2.5 2.5 0 0 1 .164 4.995L14 16h-1v1a1 1 0 0 1-1.993.117L11 17v-1H9a1 1 0 0 1-.117-1.993L9 14h5a.5.5 0 0 0 .09-.992L14 13h-4a2.5 2.5 0 0 1-.164-4.995L10 8h1V7a1 1 0 0 1 1-1"/></g></svg>
+            </span>
+          <h3 class="my-1 text-[var(--color-text-primary)] uppercase tracking-wide border-b border-[var(--color-accent)] pb-2">Affordable</h3>
+       <p class="py-4 pl-2 text-balance text-md">
             Whether you pay per class or monthly in advance, our rates are designed to make fitness accessible to everyone.
             </p>
             </li>
-            <li class="bg-[var(--color-primary-900)] rounded-lg shadow-lg p-9">
-            <div>
-            <GlowingEffect   :spread="40"
-          :glow="true"
-          :disabled="false"
-          :proximity="64"
-          :inactive-zone="0.01"/>
-            <h3 class="text-xl font-bold text-[var(--color-text-primary)] mb-4">
+                <li class="relative px-5 pt-10 pb-2 flex flex-col justify-start items-center bg- border-2 border-[var(--color-accent)] rounded-xl text-[var(--color-text-primary)] max-w-[30rem] bg-[var(--color-primary-800)]">
+             <span class="absolute -top-6 p-3 border-2 border-[var(--color-accent)] rounded-full  bg-[var(--color-primary-800)]">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" fill-rule="evenodd"><path d="m12.594 23.258l-.012.002l-.071.035l-.02.004l-.014-.004l-.071-.036q-.016-.004-.024.006l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.016-.018m.264-.113l-.014.002l-.184.093l-.01.01l-.003.011l.018.43l.005.012l.008.008l.201.092q.019.005.029-.008l.004-.014l-.034-.614q-.005-.019-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.003-.011l.018-.43l-.003-.012l-.01-.01z"/><path fill="currentColor" d="M12 12c1.873 0 3.57.62 4.815 1.487c1.183.825 2.185 2.051 2.185 3.37c0 .724-.309 1.324-.796 1.77c-.458.421-1.056.694-1.672.88C15.301 19.88 13.68 20 12 20s-3.301-.12-4.532-.493c-.616-.186-1.214-.459-1.673-.88C5.31 18.182 5 17.582 5 16.858c0-1.319 1.002-2.545 2.185-3.37C8.43 12.62 10.127 12 12 12m0 2c-1.44 0-2.743.48-3.67 1.127c-.989.69-1.33 1.392-1.33 1.73c0 .304.352.494.672.614l.205.07l.17.052c.94.284 2.32.407 3.953.407c1.508 0 2.799-.105 3.728-.344l.304-.087l.19-.06c.343-.117.778-.314.778-.652s-.341-1.04-1.33-1.73C14.744 14.481 13.44 14 12 14m7-1c1.044 0 1.992.345 2.693.833c.64.447 1.307 1.19 1.307 2.096c0 1.335-1.297 1.813-2.463 1.98l-.3.037l-.289.025l-.138.008c.122-.345.19-.72.19-1.122a3.8 3.8 0 0 0-.107-.888c.386-.03.703-.08.939-.151c.104-.032.01-.13-.1-.215l-.107-.078l-.076-.051a2.7 2.7 0 0 0-.995-.418c-.38-.76-.964-1.418-1.586-1.943A4.8 4.8 0 0 1 19 13M5 13q.537.002 1.032.113c-.622.525-1.206 1.183-1.586 1.943a2.7 2.7 0 0 0-.995.418l-.128.088c-.127.092-.276.22-.155.256c.236.071.553.122.94.151a3.7 3.7 0 0 0-.108.888c0 .402.068.777.19 1.122l-.28-.02l-.296-.03c-1.202-.147-2.614-.607-2.614-2c0-.905.666-1.649 1.307-2.096A4.76 4.76 0 0 1 5 13m13.5-6a2.5 2.5 0 1 1 0 5a2.5 2.5 0 0 1 0-5m-13 0a2.5 2.5 0 1 1 0 5a2.5 2.5 0 0 1 0-5M12 3a4 4 0 1 1 0 8a4 4 0 0 1 0-8m6.5 6a.5.5 0 1 0 0 1a.5.5 0 0 0 0-1m-13 0a.5.5 0 1 0 0 1a.5.5 0 0 0 0-1M12 5a2 2 0 1 0 0 4a2 2 0 0 0 0-4"/></g></svg>
+            </span>
+            <h3 class="my-1 text-[var(--color-text-primary)] uppercase tracking-wide border-b border-[var(--color-accent)] pb-2">
             Made for Everyone</h3>
-            <p class="text-[var(--color-text-primary)]">
+         <p class="py-4 text-balance pl-2 text-md">
             Encorporating best practice in martial arts with the science of teacching and learning, our classess meet you where you are and help you to grow to where you want to be.
             </p>
-            </div>
             </li>
             </ul>
+            </div>
         </article>
 
     </section>
@@ -304,7 +308,7 @@ onBeforeUnmount(() => {
   transform: scale(1.2);
 }
 p {
-    font-size: 1.75rem;
+ 
     line-height: 3rem;
     color: var(--color-text-primary);
 }

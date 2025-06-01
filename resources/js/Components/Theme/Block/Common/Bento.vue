@@ -1,10 +1,10 @@
 <template>
-<div v-for="child in block.childs" :key="child.content.title" :class="[p-6, getBentoSize(child)]">
+<div v-for="child in block.childs" :key="child.content.title" :class="[p-6, getBentoSize(child)]" class="text-[var(--color-text-primary)]">
+<div class="flex" >
 <h3 class="text-lg font-semibold mb-1">{{child.content.title}}</h3>
-<div v-if="child.content.content" v-html="child.content.content" class="text-sm flex-grow overflow-hidden"></div>
-<div class="flex rounded-lg bg-gunmetal-800 ring ring-gunmetal-750 overflow-hidden aspect-[340/376] @md:aspect-[640/376]">
- <img v-if="child.medias" :src="child.medias.image.default.src" :alt="child.content.title" class="object-contain object-[1rem_1rem] @md:object-[center_1rem] w-full h-full [mask-image:var(--image-mask-bottom)]" />
- </div>
+<div class="text-sm text-[var(--color-text-secondary)]" v-html="child.content.content"></div>
+</div>
+
 </div>
 </template>
 <script setup lang="ts">
