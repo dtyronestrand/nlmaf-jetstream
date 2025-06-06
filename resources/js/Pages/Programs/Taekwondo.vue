@@ -1,15 +1,16 @@
 <template>
     <Head :item="item"></Head>
-    <div v-if="$page.props.auth.user !== null" class="flex h-screen">
+    
+    <div v-if="$page.props.auth.user !== null" class="flex w-full h-screen">
     <aside class="hidden w-64 bg-gradient-to-b from-[var(--color-primary-900)] to-[var(--color-primary-800)] border-r-2 border-[var(--color-accent)] md:block">
 <div class="py-3 text-2xl uppercase text-center tracking-widest bg-[var(--color-primary-900)] border-b-2 border-[var(--color-accent)] mb-8">
 <a href="/" class="text-[var(--color-accent)]">NLMAF</a>
-<p class="text-xl">Welcome Back</p>
-        <p class="font-bold mt-10 text-[var(--color-text-primary)] text-center  sm:text-2xl text-xl">{{ $page.props.auth.user.name }}</p>
-            <div class="h-20 w-20 overflow-hidden sm:rounded-full sm:relative sm:p-0 top-10 left-5 p-4">
-         <img :src="$page.props.auth.user.profile_photo_url" alt="Profile Photo" class="w-full h-full object-cover"/>
+
+        <p class="font-bold mt-2 text-[var(--color-text-primary)] text-center  sm:text-xl text-lg">{{ $page.props.auth.user.name }}</p>
+            <div class="h-20 w-20 overflow-hidden mx-auto sm:rounded-full sm:relative sm:p-0  lp-4">
+         <img :src="$page.props.auth.user.profile_photo_url" alt="Profile Photo" class="w-full h-full mx-auto "/>
       </div>
-       <Link href="/logout" method="post" class="mt-4 px-4 py-2  text-[var(--color-neutral-100)] ">Logout</Link>
+       <Link href="/logout" method="post" class="mt-4  text-[var(--color-neutral-100)] text-lg ">Logout</Link>
 </div>
 <nav class="text-lg text-[var(--color-text-primary)]">
 <ul class="flex flex-col">
@@ -19,13 +20,16 @@
 </ul>
 
 </nav>
-  
-           
- 
-
-     
 </aside>
-<BlockCommonBento :block="bentoBlock"/>
+<main class="  gradient ">
+<div v-for="(block, index) in item.blocks" :key="index"
+class="text-center mb-10">
+<BlockCommonFeature v-if="block.type === 'common-feature'" :block="block"></BlockCommonFeature>
+
+
+</div>
+
+</main>
     </div>
   <div v-else>
 <Default>
@@ -205,27 +209,8 @@ const headlines = [
         image: "/assets/images/community.jpg",
     },
 ];
-const bentoBlock = computed(() => {
-    if (props.item?.blocks && Array.isArray(props.item.blocks)) {
-        return props.item.blocks.find((block) => block.type === 'common-bento');
-    }
-    return null;
-});
-let bentoSize  = null;
-switch(bentoBlock.value?.content.size){
-    case "small":
-     bentoSize = 2;
-     break;
-    case "medium":
-        bentoSize = 4;
-        break;
-    case "large":
-        bentoSize = 6;
-        break;
-    default:
-        bentoSize = 4;
 
-}
+
 const BlockCommonHeading = defineAsyncComponent(
     () => import("../../Components/Theme/Block/Common/Heading.vue")
 );
@@ -234,6 +219,12 @@ const BlockCommonText = defineAsyncComponent(
 );
 const BlockCommonBento = defineAsyncComponent(
     () => import("../../Components/Theme/Block/Common/Bento.vue")
+);
+const BlockCommonHero = defineAsyncComponent(
+    () => import("../../Components/Theme/Block/Common/Hero.vue")
+);
+const BlockCommonFeature = defineAsyncComponent(
+    () => import("../../Components/Theme/Block/Common/Feature.vue")
 );
 
 // --- Horizontal scroll on vertical scroll logic ---
@@ -281,6 +272,24 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
+.gradient {
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(334deg, var(--color-base-500), var(--color-base-700), var(--color-base-900));
+    background-size: 180% 190%;
+    animation: gradient-animation 6s ease infinite;
+}
+@keyframes gradient-animation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
 .section-dots {
   position: fixed;
   top: 50%;

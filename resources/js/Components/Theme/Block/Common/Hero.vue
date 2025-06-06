@@ -22,11 +22,21 @@ type PropsBlock = {
     }
     
 }
-defineProps<Props>();
+const props = defineProps<Props>();
 
 </script>
 <template>
-
+<div  v-if="block.content.variant === 'text'">
+<h1 class=" text-center pt-10 text-[var(--color-text-primary)] md:text-7xl text-5xl font-bold mb-4">
+    {{ block.content.heading }}</h1>
+<span class="text-[var(--color-text-primary)] md:text-2xl text-lg text-center block">
+    {{ block.content.subheading }}
+</span>
+<figure class="mt-8">
+    <img v-if="block.medias.image" :src="block.medias.image.default.src" height="50%" width="100%" alt="Hero Image" class="mx-auto mb-12 mt-12">
+    </figure>
+</div>
+<div v-else>
     <div v-if="block.childs" class="flex flex-col items-center justify-center text-center">
 
         <div v-for="(child,index) in block.childs" :key="index">
@@ -42,11 +52,12 @@ defineProps<Props>();
       ></div> 
     <img v-if="block.medias.image" :src="block.medias.image.default.src" height="500ox" width="500px" alt="Hero Image" class="rounded-full   mx-auto mb-12 mt-12">
     </div>
-    <div v-if="block.content.button_text && block.content.button_link" class="mt-4 flex items-center justify-center">
+    <div v-if="block.content.button_text && block.content.button_link && $page.props.auth.user === null" class="mt-4 flex items-center justify-center">
         <IconButton :href="block.content.button_link" class="inline-block px-6  py-3 bg-[var(--color-accent)] text-[var(--color-inverse-text)] font-bold rounded hover:border-[var(--color-accent-900)] hover:bg-blue-700 transition">
             {{ block.content.button_text }}
         </IconButton>
         </div>
+</div>
      
     </template>
     <style scoped>

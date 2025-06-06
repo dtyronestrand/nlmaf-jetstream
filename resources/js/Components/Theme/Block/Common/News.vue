@@ -1,5 +1,5 @@
 <template>
-<article class="flex bg-[var(--color-base-900)] border border-[var(--color-accent-500)] rounded-lg transition mx-auto hover:shadow-xl max-w-[50%] ">
+<article class="flex news border border-[var(--color-accent-500)] rounded-lg transition mx-auto hover:shadow-xl max-w-[50%] ">
 <div class="text-[var(--color-text-primary)]  p-4 sm:!border-1-transparent sm:p-6 ">
 {{dayjs( block.content.date ).format('dddd, MMMM D, YYYY')}}
 </div>
@@ -50,3 +50,11 @@ defineProps<Props>()
 
 
 </script>
+<style scoped>
+.news {
+    background: rgba(from var(--color-primary-700) r g b / 0.4);;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 30px rgba(from var(--color-accent) r g b / 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+</style>

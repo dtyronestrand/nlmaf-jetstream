@@ -120,13 +120,27 @@
   }
 
   body{
-    background: var(--gradient-bg);
+
+    background: linear-gradient(334deg, var(--color-base-400), var(--color-base-600), var(--color-base-800));
+    background-size: 180% 190%;
+    animation: gradient-animation 6s ease infinite;
     line-height: 1;
     display: grid;
     min-height:screen;
     margin:0;
     grid-template-rows: auto 1fr auto;
  overscroll-behavior-y: none;
+  }
+  @keyframes gradient-animation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
   }
   header{
     min-height: 50px;

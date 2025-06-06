@@ -73,7 +73,7 @@
          z-0 ensures this main content area is above any z-index: -1 elements (like the homepage canvas)
          and correctly positioned below the z-20 header.
          IMPORTANT: Replace 'bg-white dark:bg-neutral-800' with your site's actual page background color classes or variables. -->
-    <main class="mt-20 min-h-screen">
+    <main class="gradient">
         <slot></slot>
      
     </main>
@@ -148,6 +148,7 @@ const toggleMobileMenu = () => {
 /* Header and Navbar */
 
 /* Icons */
+
 .icon {
     transition: var(--transition-medium);
     vertical-align: middle;
