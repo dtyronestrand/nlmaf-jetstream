@@ -113,7 +113,7 @@ function goldText(sentence: string) {
 .card-content {
   box-shadow: 0 0.2em 1em rgba(0, 0, 0, 0.1), 0 1em 2em rgba(0, 0, 0, 0.1);
   background-color: var(--color-primary-900);
-  color: var(--color-900);
+
   backdrop-filter: blur(10px);
   border:2px solid var(--color-accent-500);
   color: var(--color-text-primary);

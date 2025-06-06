@@ -5,8 +5,8 @@
       <h1 class="text-7xl text-center text-[var(--color-text-primary)] mb-12">Our Programs</h1>
     <ul class="flex flex-wrap justify-center gap-4 mt-8">
       <li v-for="program in programs.data" :key="program.id" class="card">
-      <figure v-if="program.blocks && program.blocks[0].type === 'image'" class="mb-4">
-      <BlockCommonImage :block="program.blocks[0]" />
+      <figure v-if="program.blocks && program.blocks.type === 'image'" class="mb-4">
+      <BlockCommonImage :block="program.block" />
       </figure>
         <div class="card-details">
           <h2 class="text-title">{{ program.title }}</h2>
@@ -47,6 +47,7 @@ interface Props {
 }
 
 defineProps<Props>();
+const imageBlock = ()
 const BlockCommonImage = defineAsyncComponent(() => import('../../Components/Theme/Block/Common/Image.vue'))
 
 </script>

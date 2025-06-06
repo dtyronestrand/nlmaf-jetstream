@@ -95,21 +95,10 @@ class ProgramController extends Controller
                 return Str::studly($segment); // Converts 'kebab-case' to 'PascalCase'
             }, explode('/', $slug));
             $inertiaComponent = 'Programs/' . implode('/', $componentNameParts);
-                     
-            if ($slug === 'taekwondo') {
-            $user = Auth::user();
-            if ($user && $user->tkd === true) {
-                return redirect()
-                    ->route('programs.taekwondo.members')
-                    ->with([
-                        'item' => $item ? $item->only($item->publicAttributes) : null,
-                        'locale' => $locale,
-                        'menu' => $menu,
-                    ]);
-            }
-        }
+  
             return Inertia::render($inertiaComponent, [
                 'item' => $item->only($item->publicAttributes),
+                'medias' => $item->medias,
                 'locale' => $locale, // Pass locale to the view
                 'menu' => $menu, // Pass the menu to the view
             ]);
