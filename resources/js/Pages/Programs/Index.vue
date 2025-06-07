@@ -47,7 +47,7 @@ interface Props {
 }
 
 defineProps<Props>();
-const imageBlock = ()
+
 const BlockCommonImage = defineAsyncComponent(() => import('../../Components/Theme/Block/Common/Image.vue'))
 
 </script>

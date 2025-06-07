@@ -12,3 +12,4 @@ TwillRoutes::module('programs');
 TwillRoutes::module('news');
 TwillRoutes::module('sidemenus');
 TwillRoutes::module('tkdmenus');
+TwillRoutes::module('profiles');

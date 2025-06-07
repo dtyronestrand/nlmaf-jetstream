@@ -62,7 +62,10 @@ TwillNavigation::addLink(
             ->forModule('tkdmenu'),
             ]),
 );
-
+TwillNavigation::addLink(
+    NavigationLink::make()->forModule('profiles')
+   
+);
         Relation::enforceMorphMap([
             'page' => 'App\Models\Page',
             'pageHome' => 'App\Models\PageHome',
@@ -71,6 +74,7 @@ TwillNavigation::addLink(
             'news' => 'App\Models\News',
             'sidemenu' => 'App\Models\Sidemenu',
             'tkdmenu' => 'App\Models\Tkdmenu',
+            'profile' => 'App\Models\Profile',
         ]);
     }
 }

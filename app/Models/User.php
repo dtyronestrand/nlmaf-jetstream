@@ -79,4 +79,21 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-}
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
+    protected static function booted()
+    {
+        static::created(function($user) {
+            $profile = Profile::make();
+            $profile->name = $user->first_name . ' ' . $user->last_name;
+            $profile->user_id = $user->id;
+            $profile->save();
+
+          
+        });
+        }
+
+    }
+
