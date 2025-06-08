@@ -6,6 +6,7 @@ use A17\Twill\Models\Behaviors\HasBlocks;
 use A17\Twill\Models\Behaviors\HasSlug;
 use A17\Twill\Models\Behaviors\HasMedias;
 use A17\Twill\Models\Behaviors\HasFiles;
+
 use A17\Twill\Models\Model;
 
 class Profile extends Model 
@@ -18,6 +19,7 @@ class Profile extends Model
         'bio',
         'is_admin',
         'tkd_member',
+        'belt',
     ];
     public function user()
     {

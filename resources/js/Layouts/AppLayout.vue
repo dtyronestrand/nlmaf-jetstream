@@ -13,7 +13,7 @@
 <Link href="/logout" method="post" class="mt-4 px-4 py-2  text-[var(--color-neutral-100)] ">Logout</Link>
 </nav>
 </aside>
-<main class="flex-1 flex flex-col overflow-hidden">
+<main class="flex-1 flex flex-col overflow-y-auto overflow-x-hidden">
 <slot></slot>
 </main>
     </div>
