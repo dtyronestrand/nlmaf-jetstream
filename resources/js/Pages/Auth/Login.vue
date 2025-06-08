@@ -62,7 +62,7 @@ const submit = () => {
                     id="password"
                     v-model="form.password"
                     type="password"
-                    class="mt-1 block w-full"
+                    class="mt-1 block w-full text-[var(--color-neutral-900)]"
                     required
                     autocomplete="current-password"
                 />

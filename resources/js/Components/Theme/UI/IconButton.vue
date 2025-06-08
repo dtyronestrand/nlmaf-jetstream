@@ -6,10 +6,10 @@
     -->
     
     <a
-      class="group flex items-center justify-between gap-4 rounded-lg border border-[var(--color-accent)] bg-[var(--color-accent)] px-5 py-3 transition-colors hover:border-3 hover:border-[var(--color-accent-900)] hover:bg-transparent focus:ring-3 focus:outline-hidden"
+      class="group flex items-center justify-between gap-4 rounded-lg border border-[var(--color-accent)] bg-[var(--color-accent)] px-5 py-3 transition-colors hover:border-3 hover:border-[var(--color-accent-500)] hover:bg-transparent focus:ring-3 "
       :href="href"
     >
-      <span class="font-bold text-[var(--color-inverse-text))] text-xl transition-colors group-hover:text-[var(--color-inverse-text)]">
+      <span class="font-bold text-[var(--color-inverse-text))] text-xl transition-colors group-hover:text-[var(--color-text-primary)]">
 <slot/>
       </span>
     
