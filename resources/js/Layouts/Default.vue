@@ -4,7 +4,8 @@
     <nav class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <!-- Logo -->
         <Link href="/" class="flex items-center">
-            <span class="self-center text-xl font-semibold whitespace-nowrap text-[var(--color-accent-500)]">NLMAF</span>
+            <span class="self-center text-xl font-semibold whitespace-nowrap text-[var(--color-accent-500)]">NLMAF</span><p>{{ route().current() }}</p>
+         
         </Link>
 
         <!-- Right-aligned items group (Download, Login/Logout, Mobile Hamburger) --
@@ -48,19 +49,20 @@
      class="items-center justify-between w-full md:flex md:w-auto md:order-1">
             <ul class="flex flex-col mt-4 font-medium md:flex-row md:space-x-8 md:mt-0">
                 <li v-for="link in $page.props.menuLinks" :class="link.submenu ? 'has-dropdown' : ''" :key="link.id">
-                    <Link v-if="!link.submenu" :href="link.url"
-                        class="block py-2 pl-3 pr-4 rounded md:bg-transparent bg-[var(--color-primary-600)] md:p-0 text-[var(--color-text-primary)] transition hover:text-[var(--color-secondary-500)]"
-                        aria-current="page">{{ link.title }}</Link>
+                    <NavLink v-if="!link.submenu" :href="link.url"
+                       :active="isLinkActive(link.url)" class="block py-2 pl-3 pr-4 rounded md:bg-transparent bg-[var(--color-primary-600)] md:p-0 text-[var(--color-text-primary)] transition hover:text-[var(--color-secondary-500)]"
+                        aria-current="page">{{ link.title }}</NavLink>
                     <span v-else>
-                        <Link :href="link.url"
+                        <NavLink :href="link.url"
+                            :active="isParentLinkActive(link.url)"
                             class=" block py-2 pl-3 pr-4 rounded md:flex md:bg-transparent bg-[var(--color-primary-600)] md:p-0 text-[var(--color-text-primary)] transition hover:text-[var(--color-secondary-500)]">
                         {{ link.title }} <svg class="icon chevron-icon" viewBox="0 0 24 24" width="14" height="14">
                             <path d="M7 10l5 5 5-5z" fill="currentColor"></path>
                         </svg>
-                        </Link>
+                        </NavLink>
                         <ul class="dropdown">
                             <li v-for="sub in link.submenu" :key="sub.id">
-                                <Link :href="sub.url">{{ sub.title }}</Link>
+                                <NavLink  :active="isLinkActive(sub.url)" :href="sub.url">{{ sub.title }}</NavLink>
                             </li>
                         </ul>
                     </span>
@@ -111,14 +113,16 @@
     </footer>
 </template>
 <script setup>
-import { Link } from "@inertiajs/vue3";
+
+import NavLink from "@/Components/NavLink.vue";
+import {usePage, router} from "@inertiajs/vue3";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { useForm } from "@inertiajs/vue3";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import IconButton from "@/Components/Theme/UI/IconButton.vue";
-import {router} from "@inertiajs/vue3";
-const form = useForm();
+
+const page = usePage();
 const handleLogout = ()=>{
     router.post(route('logout'));
 }
@@ -126,7 +130,25 @@ const handleLogin  = ()=>{
     router.visit(route('login'))
 }
 
+const getCurrentPath = computed(() =>{
+    return page.url.split('?')[0];
+});
 
+const isLinkActive = (linkUrl)=>{
+    const currentPathValue = getCurrentPath.value;
+    if (linkUrl === '/'){
+        return currentPathValue === '/';
+    }
+    return currentPathValue === linkUrl
+};
+const isParentLinkActive = (parentUrl, submenu = []) => {
+    const currentPathValue = getCurrentPath.value;
+    if (parentUrl !== '/' && (currentPathValue === parentUrl || currentPathValue.startsWith(parentUrl + '/'))) {
+        return true; // Parent link is active
+    }
+    return submenu.some(sub => sub.url === currentPathValue);
+
+};
 
 // Reactive state for mobile menu visibility
 const isMobileMenuOpen = ref(false); // Initially closed

@@ -128,7 +128,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     min-height:screen;
     margin:0;
     grid-template-rows: auto 1fr auto;
- overscroll-behavior-y: none;
+    overscroll-behavior-y: none;
   }
   @keyframes gradient-animation {
     0% {

@@ -7,7 +7,7 @@
 <nav class="text-lg text-[var(--color-text-primary)]">
 <ul class="flex flex-col">
 <li v-for="(link, index) in $page.props.sidemenu">
-<Link :href="link.url" :key="index" class="flex items-center px-4 py-2 hover:bg-[var(--color-accent-500)] hover:text-[var(--color-neutral-900)] hover:text-[var(--color-text-primary)]">{{ link.title }}</Link>
+<Link :href="link.url" :key="index" class="flex items-center px-4 py-2 hover:bg-[var(--color-accent-500)] hover:text-[var(--color-neutral-900)] ">{{ link.title }}</Link>
 </li>
 </ul>
 <Link href="/logout" method="post" class="mt-4 px-4 py-2  text-[var(--color-neutral-100)] ">Logout</Link>
