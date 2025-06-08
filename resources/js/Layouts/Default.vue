@@ -15,7 +15,7 @@
  
          
             
-            <div v-if="$page.props.auth.user" class="md:order-2 ml-2 sm:mr-2"> <!-- Adjusted margins for consistency --><span class="mr-2 text-[var(--color-text-primary)]">Welcome, {{ $page.props.auth.user.name }}</span>
+            <div v-if="$page.props.auth.user" class="md:order-2 ml-2 sm:mr-2"> <!-- Adjusted margins for consistency --><span class="mr-2 text-lg text-[var(--color-text-primary)]"><a href="/user/profile" >{{ $page.props.auth.user.name }}</a></span>
                 <SecondaryButton @click="handleLogout">Logout</SecondaryButton>
             </div>
             <div v-else class="md:order-2 ml-2 sm:mr-2"> <!-- Adjusted margins for consistency -->

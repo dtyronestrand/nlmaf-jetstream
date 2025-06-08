@@ -1,5 +1,5 @@
 <script setup>
-import AppLayout from '@/Layouts/AppLayout.vue';
+import Default from '@/Layouts/Default.vue';
 import DeleteUserForm from '@/Pages/Profile/Partials/DeleteUserForm.vue';
 import LogoutOtherBrowserSessionsForm from '@/Pages/Profile/Partials/LogoutOtherBrowserSessionsForm.vue';
 import SectionBorder from '@/Components/SectionBorder.vue';
@@ -14,17 +14,16 @@ defineProps({
 </script>
 
 <template>
-    <AppLayout title="Profile">
-        <template #header>
-            <h2 class="font-semibold text-xl text-[var(--color-text-primary)] leading-tight">
-                Profile
-            </h2>
-        </template>
+    <Default title="Account">
+
 
         <div>
-            <div class="max-w-7xl mx-auto py-20 sm:px-6 lg:px-8">
+                <h2 class="font-semibold text-5xl text-[var(--color-text-primary)] mt-10 text-center leading-tight">
+                Account Settings
+            </h2>
+            <div class=" max-w-7xl mx-auto py-20 sm:px-6 lg:px-8">
                 <div v-if="$page.props.jetstream.canUpdateProfileInformation">
-                    <UpdateProfileInformationForm :user="$page.props.auth.user" />
+                    <UpdateProfileInformationForm  :user="$page.props.auth.user" />
 
                     <SectionBorder />
                 </div>
@@ -53,5 +52,5 @@ defineProps({
                 </template>
             </div>
         </div>
-    </AppLayout>
+    </Default>
 </template>
