@@ -1,8 +1,9 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
 import Welcome from '@/Components/Welcome.vue';
-import { ref } from 'vue';
-
+import { ref , computed} from 'vue';
+import { usePage } from '@inertiajs/vue3';
+const page = usePage();
 // Reactive variable for the profile picture source
 const profilePicSrc = ref('');
 // Ref for the file input element
@@ -30,12 +31,45 @@ const isMobileMenuOpen = ref(false); // Initially closed
 const toggleMobileMenu = () => {
   isMobileMenuOpen.value = !isMobileMenuOpen.value;
 };
+
+const beltOrder =[
+  'white',
+  'yellow',
+  'orange',
+  'green',
+  'blue',
+  'purple',
+  'brown',
+  'black'
+];
+const beltRequirements = {
+	'white': 'none',
+	'yellow': {
+		'poomsae': "Taekwondo Form 2 - Ee Jjjang and ITF Form Dan-Gun"
+	},
+	
+}
+// Safely compute currentBelt, convert to lowercase, and provide a default.
+const currentBelt = computed(() => {
+  // Use optional chaining to safely access profile and belt.
+  // Convert to lowercase for consistent comparison with beltOrder.
+  const belt = page.props.auth.user?.profile?.belt;
+  return belt ? belt.toLowerCase() : 'white'; // Default to 'white' if no belt or profile.
+});
+
+const getNextBelt = (belt) => {
+  const currentIndex = beltOrder.indexOf(belt); // belt is now guaranteed to be lowercase from currentBelt
+  if (currentIndex === -1 || currentIndex === beltOrder.length - 1) {
+	return 'black'; // If the current belt is not found or is the last one, return black
+  }
+  return beltOrder[currentIndex + 1];
+}
+const nextBelt = computed(() => getNextBelt(currentBelt.value));
 </script>
 
 
 <template>
 <AppLayout>
-
    <div class="border-1 shadow-lg shadow-[var(--color-base-900)] rounded-lg">
    <!-- top content -->
    <div class=" flex rounded-t-lg bg-gradient-to-b from-[var(--color-primary-900)] to-[var(--color-primary-800)] sm:px-2 w-full ">
@@ -52,16 +86,18 @@ const toggleMobileMenu = () => {
    <div class="fle flex-col sm:w-1/3">
    <!-- Contact Info -->
    <div class="py-2 sm:order-none order-3">
- <h2 class="text-[var(--color-text-primary)] text-2xl font-bold mb-4">Contact Info</h2>
-    <p class="text-[var(--color-text-primary)] mb-2"><strong>Email:</strong> {{ $page.props.auth.user.email }}</p>
+ <h2 class="text-[var(--color-text-primary)] text-2xl font-bold mb-4">Current Belt</h2>
+ <div class="w-[100px] h-[25px] mb-6" :style="{ backgroundColor: currentBelt }"></div> <!-- Use computed currentBelt -->
+    <p class="text-[var(--color-text-primary)]  text-lg px-6 mb-2"><strong>{{ currentBelt }}</strong></p> <!-- Use computed currentBelt -->
     <p v-if="$page.props.auth.user.address" class="text-[var(--color-text-primary)] mb-2"><strong>Address:</strong> {{ $page.props.auth.user.address || 'Not provided' }}</p>
     <p v-if="$page.props.auth.user.city && $page.props.auth.user.state && $page.props.auth.user.zip" class="text-[var(--color-text-primary)] mb-2">{{ $page.props.auth.user.city }}, {{ $page.props.auth.user.state }} {{ $page.props.auth.user.zip }}</p>
 
    </div>
    </div>
    <div class="py-2 sm:order-none order-2">
-   <h2 class="text-[var(--color-text-primary)] text-2xl font-bold mb-4"> Bio</h2>
-    <p v-if="$page.props.auth.user.bio" class="text-[var(--color-text-primary)]">{{ $page.props.auth.user.bio}}</p>
+   <h2 class="text-[var(--color-text-primary)] text-2xl font-bold mb-4"> Next Belt</h2>
+   <div class="w-[100px] h-[25px] mb-6" :style="{ backgroundColor: nextBelt }"></div> <!-- Use computed nextBelt -->
+    <p class="text-[var(--color-text-primary)]">{{nextBelt}}</p>
    </div>
    </div>
    </div>

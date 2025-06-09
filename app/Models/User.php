@@ -34,7 +34,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'tkd',
+        'bio',
+     
     ];
 
     protected function name(): Attribute
@@ -44,7 +45,6 @@ class User extends Authenticatable
         );
     }
 
- 
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -65,8 +65,12 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
         'name',
-    ];
 
+
+
+     
+    ];
+protected $with = ['profile'];
     /**
      * Get the attributes that should be cast.
      *
@@ -89,6 +93,7 @@ class User extends Authenticatable
             $profile = Profile::make();
             $profile->name = $user->first_name . ' ' . $user->last_name;
             $profile->user_id = $user->id;
+            
             $profile->save();
 
           

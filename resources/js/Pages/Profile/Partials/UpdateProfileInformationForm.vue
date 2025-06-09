@@ -17,6 +17,7 @@ const form = useForm({
     _method: 'PUT',
     name: props.user.name,
     email: props.user.email,
+    bio: props.user.bio || props.user.profile.bio, // Added bio field
     photo: null,
 });
 
@@ -145,7 +146,17 @@ const clearPhotoFileInput = () => {
                 />
                 <InputError :message="form.errors.name" class="mt-2" />
             </div>
-
+            <div class="col-span-6 sm:col-span-4">
+            <InputLabel for="bio" value="Bio" />
+            <TextInput
+                id="bio"
+                v-model="form.bio"
+                type="text"
+                class="mt-1 block w-full"
+                autocomplete="bio"
+                />
+            <InputError :message="form.errors.bio" class="mt-2" />
+            </div>
             <!-- Email -->
             <div class="col-span-6 sm:col-span-4">
                 <InputLabel for="email" value="Email" />

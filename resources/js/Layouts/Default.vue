@@ -3,10 +3,10 @@
    <header class=" sticky z-20 top-0 left-0 w-[100vw] bg-[var(--color-primary-800)] border-b border-[var(--color-accent-500)] ">
     <nav class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <!-- Logo -->
-        <Link href="/" class="flex items-center">
+        <NavLink href="/" class="flex items-center">
             <span class="self-center text-xl font-semibold whitespace-nowrap text-[var(--color-accent-500)]">NLMAF</span><p>{{ route().current() }}</p>
          
-        </Link>
+        </NavLink>
 
         <!-- Right-aligned items group (Download, Login/Logout, Mobile Hamburger) --
         <div class="flex items-center md:order-2">
@@ -103,7 +103,7 @@
     <p class="font-medium text-[var(--color-text-primary)]">Navigation</p>
     <ul class="mt-6 space-y-4 text-sm">
     <li v-for="link in $page.props.menuLinks" :key="link.id">
-    <Link :href="link.url" class="text-[var(--color-text-primary)] hover:text-[var(--color-accent)]">{{ link.title }}</Link>
+    <NavLink :href="link.url" class="text-[var(--color-text-primary)] hover:text-[var(--color-accent)]">{{ link.title }}</NavLink>
     </li>
     </ul>
     </div>
@@ -121,6 +121,9 @@ import { ref, computed } from "vue";
 import { useForm } from "@inertiajs/vue3";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import IconButton from "@/Components/Theme/UI/IconButton.vue";
+defineProps({
+    title: String
+});
 
 const page = usePage();
 const handleLogout = ()=>{

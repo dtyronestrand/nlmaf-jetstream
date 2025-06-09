@@ -1,7 +1,7 @@
 <template>
     <Head :item="item"></Head>
     
-    <div v-if="$page.props.auth.user !== null" class="flex w-full h-screen">
+    <div v-if="tkd" class="flex w-full h-screen">
     <aside class="hidden w-64 bg-gradient-to-b from-[var(--color-primary-900)] to-[var(--color-primary-800)] border-r-2 border-[var(--color-accent)] md:block">
 <div class="py-3 text-2xl uppercase text-center tracking-widest bg-[var(--color-primary-900)] border-b-2 border-[var(--color-accent)] mb-8">
 <a href="/" class="text-[var(--color-accent)]">NLMAF</a>
@@ -85,6 +85,7 @@ class="text-center mb-10">
         <article class="content-inner">
             <h2 class="content__title">
                 Taekwondo is More Than Just a Martial Art
+                {{ $page.props.auth.user.profile.tkd_member ? 'Member' : 'Non-Member' }}
             </h2>
             <p class="text-2xl">
                 Originating in Korea over 2,000 years ago, Taekwondo is a
@@ -176,12 +177,18 @@ import { Link } from "@inertiajs/vue3";
 import TextGenerate from "@/Components/Theme/UI/TextGenerate.vue";
 import TextScrollReveal from "@/Components/Theme/UI/TextScroll/TextScrollReveal.vue";
 import Default from '../../Layouts/Default.vue';
+import {usePage} from "@inertiajs/vue3";
 import GlowingEffect from "@/Components/Theme/UI/GlowingEffect.vue";
 
 interface Props {
     item: Model.Program;
 }
+
 const props = defineProps<Props>();
+const page = usePage();
+const tkd = computed(() => {
+    return page.props.auth.user.profile.tkd_member === 1;
+});
 const words = "What Can Taekwondo Do For You?";
 const headlines = [
     {
