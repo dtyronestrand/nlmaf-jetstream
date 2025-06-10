@@ -10,6 +10,7 @@ defineProps<Props>()
 const BlockCommonHeading = defineAsyncComponent(() => import('@/Components/Theme/Block/Common/Heading.vue'))
 const BlockCommonCardblock = defineAsyncComponent(() => import('@/Components/Theme/Block/Common/Cardblock.vue'))
 const BlockCommonLanding = defineAsyncComponent(() => import('@/Components/Theme/Block/Common/Landing.vue'))
+const BlockCommonHero = defineAsyncComponent(() => import('@/Components/Theme/Block/Common/Hero.vue'))
 </script>
 <template>
     <Head :item="item"></Head>
@@ -35,6 +36,7 @@ const BlockCommonLanding = defineAsyncComponent(() => import('@/Components/Theme
             v-if="block.type == 'common-landing'"
             :block="block"
         ></BlockCommonLanding>
+     
 
 
   

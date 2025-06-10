@@ -26,27 +26,31 @@ class Hero extends Base
                     Option::make('default', 'Default'),
                 Option::make('cta', 'Call to Action'),
                 Option::make('text', 'Text and Image'),
+                Option::make('home', 'Home'),
                 ])
                 ),
             BlockEditor::make()->name('heading')
             ->blocks(['common-heading'])
             ->label(__('Heading'))
-            ->connectedTo('variant', ['default', 'cta']),
+            ->connectedTo('variant', ['default', 'cta', 'home']),
+            Input::make()->name('details')
+            ->label(__('Details'))
+            ->connectedTo('variant', ['home']),
             Medias::make()
             ->name('image')
             ->label(__('Image'))
             ->max(1)
-            ->connectedTo('variant', ['default', 'cta', 'text']),
+            ->connectedTo('variant', ['default', 'cta', 'text', 'home']),
             Input::make()
             ->name('button_link')
             ->label('Button Link')
             ->translatable()
-            ->connectedTo('variant', ['default', 'cta']),
+            ->connectedTo('variant', ['default', 'cta', 'home']),
             Input::make()
             ->name('button_text')
             ->label('Button Text')
             ->translatable()
-            ->connectedTo('variant', ['default', 'cta']),
+            ->connectedTo('variant', ['default', 'cta', 'home']),
             Input::make()
             ->name('heading')
             ->label(__('Heading'))

@@ -26,6 +26,8 @@ const props = defineProps<Props>();
 
 </script>
 <template>
+    
+
 <div  v-if="block.content.variant === 'text'">
 <h1 class=" text-center pt-10 text-[var(--color-text-primary)] md:text-7xl text-5xl font-bold mb-4">
     {{ block.content.heading }}</h1>
