@@ -7,7 +7,8 @@ use A17\Twill\Models\Behaviors\HasSlug;
 use A17\Twill\Models\Behaviors\HasMedias;
 use A17\Twill\Models\Behaviors\HasFiles;
 
-use A17\Twill\Models\Model;
+use App\Models\Base\Model;
+
 
 class Profile extends Model 
 {

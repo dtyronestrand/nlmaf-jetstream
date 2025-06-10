@@ -1,7 +1,7 @@
 <template>
     <Head :item="item"></Head>
     
-    <div v-if="tkd" class="flex w-full h-screen">
+    <div v-if="$page.props.auth.user !== null && tkd" class="flex w-full h-screen">
     <aside class="hidden w-64 bg-gradient-to-b from-[var(--color-primary-900)] to-[var(--color-primary-800)] border-r-2 border-[var(--color-accent)] md:block">
 <div class="py-3 text-2xl uppercase text-center tracking-widest bg-[var(--color-primary-900)] border-b-2 border-[var(--color-accent)] mb-8">
 <a href="/" class="text-[var(--color-accent)]">NLMAF</a>
@@ -37,7 +37,7 @@ class="text-center mb-10">
         <TextGenerate
             :words="words"
             :duration="2.5"
-            class="text-[var(--color-text-primary)] mb-12 mt-12 text-5xl md:text-7xl text-center text-balance"
+            class="text-[var(--color-text-primary)] mb-12 mt-12 text-5xl md:text-7xl "
         />
     </h1>
     <div class="section-dots">
@@ -85,7 +85,9 @@ class="text-center mb-10">
         <article class="content-inner">
             <h2 class="content__title">
                 Taekwondo is More Than Just a Martial Art
-                {{ $page.props.auth.user.profile.tkd_member ? 'Member' : 'Non-Member' }}
+                <span v-if="$page.props.auth.user && $page.props.auth.user.profile">
+                    {{ $page.props.auth.user.profile.tkd_member ? 'Member' : 'Non-Member' }}
+                </span>
             </h2>
             <p class="text-2xl">
                 Originating in Korea over 2,000 years ago, Taekwondo is a
@@ -187,7 +189,7 @@ interface Props {
 const props = defineProps<Props>();
 const page = usePage();
 const tkd = computed(() => {
-    return page.props.auth.user.profile.tkd_member === 1;
+    return page.props.auth.user?.profile?.tkd_member === 1;
 });
 const words = "What Can Taekwondo Do For You?";
 const headlines = [
@@ -367,7 +369,7 @@ figure {
     width: 100%;
     font-size: 8vw;
     letter-spacing: -0.125rem;
-    text-align: center;
+   
     color: var(--color-primary-500);
     text-shadow: 0 0 10px var(--color-accent-500);
     z-index: 2;
